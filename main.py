@@ -121,4 +121,3 @@ def get_inputs():
 if __name__ == '__main__':
     website_url, folder_path = get_inputs()
     fetchImageListAndDownload(website_url, folder_path)
-    print("test")
