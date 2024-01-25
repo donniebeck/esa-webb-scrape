@@ -71,9 +71,10 @@ def fetchImageListAndDownload(url, save_folder='images'):
 
 
 class CustomDialog(simpledialog.Dialog):
-    def __init__(self, parent, title, website_label, folder_label):
+    def __init__(self, parent, title, website_label, folder_label, default_website_url=''):
         self.website_label = website_label
         self.folder_label = folder_label
+        self.default_website_url = default_website_url
         super().__init__(parent, title)
 
     def body(self, master):
@@ -82,6 +83,9 @@ class CustomDialog(simpledialog.Dialog):
 
         self.website_entry = tk.Entry(master)
         self.folder_entry = tk.Entry(master)
+
+        # Set default value for website URL
+        self.website_entry.insert(0, self.default_website_url)
 
         self.website_entry.grid(row=0, column=1)
         self.folder_entry.grid(row=1, column=1)
@@ -102,8 +106,11 @@ def get_inputs():
     root = tk.Tk()
     root.withdraw()
 
+     # Set a default website URL
+    default_website_url = "https://esawebb.org/images/archive/category/pictureofthemonth/"
+
     # Create a custom dialog with labels for website and folder
-    dialog = CustomDialog(root, "ESA / Webb Scraper", "Enter Gallery URL:", "Enter Folder Path:")
+    dialog = CustomDialog(root, "ESA / Webb Scraper", "Enter Gallery URL:", "Enter Folder Path:", default_website_url)
 
     # Get the result (tuple containing website URL and folder path)
     result = dialog.result
